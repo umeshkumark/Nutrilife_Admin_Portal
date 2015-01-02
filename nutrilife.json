@@ -1,0 +1,24 @@
+{
+  "environment":"openshift",
+  "clientDirectory":"/client",
+  "homeScreen":"/client/index.html",
+  "dev":{
+    "httpPort":"32100",
+    "dbURI":"mongodb://nutrilifeuser:nutrilifeuser@ds059887.mongolab.com:59887/nutrilife",
+    "serverIp":"127.0.0.1"
+  },
+  "prod":{
+    "httpPort":"",
+    "dbURI":""
+  },
+  "openshift":{
+    "httpPort":"",
+    "dbURI":"mongodb://nutrilifeuser:nutrilifeuser@ds059887.mongolab.com:59887/nutrilife",
+    "serverIp":"127.0.0.1"
+  },
+  "heroku":{
+    "httpPort":"",
+    "dbURI":"",
+    "serverIp":"127.0.0.1"
+  }
+}

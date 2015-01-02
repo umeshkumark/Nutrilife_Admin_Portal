@@ -1,0 +1,53 @@
+/*
+ * file - nutrilife.css
+ * desc - css file for the nutrilife portal
+ * author - Umesh Kumar
+ * email - umeshkumark@outlook.com
+ * github - https://github.com/ukbokamalla
+*/
+
+.horizontal_divider_one {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.nutrilife_text_medium {
+    width: 75%;
+}
+.nutrilife_text_small {
+    width: 50%;
+}
+.nutrilife_text_xxsmall {
+    width: 25%;
+}
+.home_screen_text_medium {
+    width:75%;
+}
+.home_screen_text_area_medium {
+    width:75%;
+}
+.site_header {
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: 400;
+}
+.site_footer {
+    font-family: 'Special Elite', sans-serif;
+    font-weight: 100;
+}
+#navigationDiv {
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: 400;
+}
+#ngViewDiv {
+    font-family: 'Droid Sans', sans-serif;
+}
+.control-label{
+    font-family: 'Inconsolata', sans-serif;
+}
+.ngTopPanel{
+    font-family: 'Inconsolata', sans-serif;
+}
+.nutrilife-dashboard{
+    background:url('images/nutrilife_dashboard.png');
+}

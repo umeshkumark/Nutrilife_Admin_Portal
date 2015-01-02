@@ -1,0 +1,64 @@
+<div class="container-fluid" ng-controller="ConsultationCtrl" >
+    <div class="jumbotron" id="consultation">
+        <form id="consultationAdd" name="consultationForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Plan Name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Name</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="planName" placeholder="Enter Plan Name" class="k-textbox nutrilife_text_medium" ng-model="consultation.name">
+                </div>
+            </div>
+
+            <!-- Plan Desc -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Description</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="planDesc" placeholder="Enter Description" class="k-textbox nutrilife_text_medium" ng-model="consultation.desc">
+                </div>
+            </div>
+
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Diet Plan Grid -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+                <div ng-grid="gridOptions" class="mc_grid" style="height:250px;width:75%">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

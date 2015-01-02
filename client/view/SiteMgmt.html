@@ -1,0 +1,72 @@
+<div class="container-fluid" ng-controller="SiteMgmtCtrl" >
+    <div class="jumbotron" id="siteMgmt">
+        <form id="siteMgmtAdd" name="siteMgmtForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Site Header -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Site Header</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="siteHeader" placeholder="Enter Site Header" class="k-textbox nutrilife_text_medium" ng-model="sitemgmt.site_header">
+                </div>
+            </div>
+
+            <!-- Site Footer -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Site Footer</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="siteFooter" placeholder="Enter Site Footer" class="k-textbox nutrilife_text_medium" ng-model="sitemgmt.site_footer">
+                </div>
+            </div>
+
+            <!-- Login Header -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Login Header</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="loginHeader" placeholder="Enter Login Header" class="k-textbox nutrilife_text_medium" ng-model="sitemgmt.login_header">
+                </div>
+            </div>
+
+            <!-- Login Footer -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Login Footer</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="loginFooter" placeholder="Enter Login Footer" class="k-textbox nutrilife_text_medium" ng-model="sitemgmt.login_footer">
+                </div>
+            </div>
+
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

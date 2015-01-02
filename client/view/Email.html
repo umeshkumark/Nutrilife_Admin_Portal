@@ -1,0 +1,140 @@
+<div class="container-fluid" ng-controller="EmailCtrl" >
+    <div class="jumbotron" id="email">
+        <form id="emailAdd" name="emailAddForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- User -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">User</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="userName" placeholder="Enter User" class="k-textbox nutrilife_text_medium" ng-model="email.user">
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Password</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="password" id="password" placeholder="Enter Password" class="k-textbox nutrilife_text_medium" ng-model="email.password">
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Confirm Password</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="password" id="confPassword" placeholder="Re-Enter Password" class="k-textbox nutrilife_text_medium" ng-model="email.confPassword">
+                </div>
+            </div>
+
+            <!-- Host -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Email Host</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="host" placeholder="Enter Host Details" class="k-textbox nutrilife_text_medium" ng-model="email.host">
+                </div>
+            </div>
+
+            <!-- SSL -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">is SSL</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="2"
+                            ng-model="email.ssl"
+                            k-data-source="sslOptions">
+                    </input>
+                </div>
+            </div>
+
+
+            <!-- add a divider -->
+            <div>
+                <hr class="horizontal_divider_one">
+            </div>
+
+            <!-- From e-mail -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">From E-mail</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="fromEmail" placeholder="Enter from Email ID" class="k-textbox nutrilife_text_medium" ng-model="email.from_email">
+                </div>
+            </div>
+            <!-- From name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">From Name</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="fromName" placeholder="Enter Login ID" class="k-textbox nutrilife_text_medium" ng-model="email.from_name">
+                </div>
+            </div>
+            <!-- To e-mail -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">To E-mail</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="toEmail" placeholder="Enter Login ID" class="k-textbox nutrilife_text_medium" ng-model="email.to_email">
+                </div>
+            </div>
+            <!-- To name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">To Name</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="toName" placeholder="Enter Login ID" class="k-textbox nutrilife_text_medium" ng-model="email.to_name">
+                </div>
+            </div>
+
+            <!-- Site URL  -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Site URL</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="siteURL" placeholder="Enter Login ID" class="k-textbox nutrilife_text_medium" ng-model="email.site_url">
+                </div>
+            </div>
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

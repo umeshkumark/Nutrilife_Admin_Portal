@@ -1,0 +1,104 @@
+<div class="container-fluid" ng-controller="ReportCtrl" >
+    <div class="jumbotron" id="report">
+        <form id="reportAdd" name="reportForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Customer Name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">First Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="firstName" placeholder="Enter First Name" class="k-textbox nutrilife_text_medium" ng-model="customerFilter.first_name">
+                </div>
+
+                <label class="col-md-2 control-label">Last Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="lastName" placeholder="Enter Last Name" class="k-textbox nutrilife_text_medium" ng-model="customerFilter.last_name">
+                </div>
+            </div>
+
+            <!-- Consultation & Plan -->
+            <div class="row form-group">
+                <!-- Consultation Age -->
+                <!-- label -->
+                <label class="col-md-2 control-label">Consulation Type</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="5"
+                            ng-model="customerFilter.consultation_id"
+                            k-data-source="consultationList">
+                    </input>
+                </div>
+
+                <!-- Plan-->
+                <label class="col-md-2 control-label">Plan Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="5"
+                            ng-model="customerFilter.plan_id"
+                            k-data-source="dietPlanList">
+                    </input>
+                </div>
+            </div>
+            <div class="row form-group">
+                <!-- EXPORT -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="getFilteredCustomerList()">FILTER</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onResetCustomerFilter()">RESET FILTER</a>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Report Grid -->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-grid="customerGridOptions" class="mc_grid" style="height:200px;width:100%">
+                </div>
+            </div>
+        </div>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Email & Export Options -->
+        <div class="row form-group">
+            <!-- SEND EMAIL -->
+            <div class="col-md-2 col-md-offset-2" >
+                <a class="btn btn-primary btn-md" role="button" ng-click="onSendEmail()">SEND EMAIL</a>
+            </div>
+
+            <!-- EXPORT -->
+            <div class="col-md-2 col-md-offset-2" >
+                <a class="btn btn-primary btn-md" role="button" ng-click="onExport()">EXPORT</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>

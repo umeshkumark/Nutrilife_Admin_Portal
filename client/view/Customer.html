@@ -1,0 +1,219 @@
+<div class="container-fluid" ng-controller="CustomerCtrl" >
+    <div class="jumbotron" id="customer">
+        <form id="customerAdd" name="customerForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Customer Name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">First Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="firstName" placeholder="Enter First Name" class="k-textbox nutrilife_text_medium" ng-model="customer.first_name">
+                </div>
+
+                <label class="col-md-2 control-label">Last Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="lastName" placeholder="Enter Last Name" class="k-textbox nutrilife_text_medium" ng-model="customer.last_name">
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <!-- Customer Age -->
+                <!-- label -->
+                <label class="col-md-2 control-label">Age</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="age" placeholder="Age" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.age">
+                </div>
+
+                <!-- Sex -->
+                <label class="col-md-2 control-label">Sex</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="2"
+                            ng-model="customer.sex"
+                            k-data-source="sexList">
+                    </input>
+                </div>
+            </div>
+
+            <!-- Customer Height & Weight-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Height (in cm)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="height" placeholder="Height" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.height">
+                </div>
+
+                <label class="col-md-2 control-label">Weight (in kg)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="weight" placeholder="Weight" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.weight">
+                </div>
+            </div>
+
+            <!-- Consultation & Plan -->
+            <div class="row form-group">
+                <!-- Consultation Age -->
+                <!-- label -->
+                <label class="col-md-2 control-label">Consulation Type</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="5"
+                            ng-model="customer.consultation_id"
+                            k-data-source="consultationList">
+                    </input>
+                </div>
+
+                <!-- Plan-->
+                <label class="col-md-2 control-label">Plan Name</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="5"
+                            ng-model="customer.plan_id"
+                            k-data-source="dietPlanList">
+                    </input>
+                </div>
+            </div>
+
+            <!--Medical Condition & Goal-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Medical Condition</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="medicalCondition" placeholder="Enter Medical Condition" class="k-textbox nutrilife_text_medium" ng-model="customer.medical_condition">
+                </div>
+
+                <label class="col-md-2 control-label">Goal</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="goal" placeholder="Enter Goal" class="k-textbox nutrilife_text_medium" ng-model="customer.goal">
+                </div>
+            </div>
+
+            <!--Duration & Start Date -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Duration (in months)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="duration" placeholder="Duration" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.plan_duration">
+                </div>
+
+                <label class="col-md-2 control-label">Start Date</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-date-picker id="startDate" ng-model="customer.start_date">
+                </div>
+            </div>
+
+            <!-- Plan Price-->
+            <div class="row form-group" ng-show="userDetails.role=='Super_Admin'" ng-hide="userDetails.role=='Admin'">
+                <!-- label -->
+                <label class="col-md-2 control-label">Price (in INR)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="price" placeholder="Price" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.price">
+                </div>
+            </div>
+
+            <!-- Amount  Paid-->
+            <div class="row form-group" ng-show="userDetails.role=='Super_Admin'" ng-hide="userDetails.role=='Admin'">
+                <!-- label -->
+                <label class="col-md-2 control-label">Amount Paid (in INR)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="amountPaid" placeholder="Paid" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.amount_paid">
+                </div>
+
+                <label class="col-md-2 control-label">Comments</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="amountPaidComments" placeholder="Enter Comments for Amount Paid" class="k-textbox nutrilife_text_medium" ng-model="customer.amount_paid_comments">
+                </div>
+            </div>
+
+            <!-- Balance -->
+            <div class="row form-group" ng-show="userDetails.role=='Super_Admin'" ng-hide="userDetails.role=='Admin'">
+                <!-- label -->
+                <label class="col-md-2 control-label">Balance Amount (in INR)</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="amountBalance" placeholder="Balance" class="k-textbox nutrilife_text_xxsmall" ng-model="customer.amount_balance">
+                </div>
+
+                <label class="col-md-2 control-label">Comments</label>
+                <!-- value-->
+                <div class="col-md-4
+                " >
+                    <input type="text" id="amountBalanceComments" placeholder="Enter Comments for Balance Amount" class="k-textbox nutrilife_text_medium" ng-model="customer.amount_balance_comments">
+                </div>
+            </div>
+
+            <!-- Misc Comments -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Misc Comments</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="planDesc" placeholder="Enter Misc Comments" class="k-textbox nutrilife_text_medium" ng-model="customer.misc_comments">
+                </div>
+            </div>
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Customer Grid -->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-grid="gridOptions" class="mc_grid" style="height:250px;width:100%">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

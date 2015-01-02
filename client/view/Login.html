@@ -1,0 +1,42 @@
+<div class="container-fluid" ng-controller="LoginCtrl" >
+    <div class="jumbotron" id="login">
+        <form id="loginForm" name="loginForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">User ID</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="loginId" placeholder="Enter your Login ID" class="k-textbox nutrilife_text_medium" ng-model="login.login_id">
+                </div>
+                <div class="col-md-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onProceed()">Proceed</a>
+                </div>
+            </div>
+
+            <div class="row form-group" ng-hide="isShowLoginButton == false" ng-show="isShowLoginButton == true">
+                <!-- label -->
+                <label class="col-md-2 control-label">Password </label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="password" id="password" placeholder="Enter your Password" class="k-textbox nutrilife_text_medium" ng-model="login.password">
+                </div>
+            </div>
+
+            <div class="row form-group" ng-hide="isShowLoginButton == false" ng-show="isShowLoginButton == true">
+                <div class="col-md-4" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onLogin()">Login</a>
+                </div>
+                <div class="col-md-4" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onForgotPassword()">Forgot Password</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

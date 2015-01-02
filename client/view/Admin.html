@@ -1,0 +1,112 @@
+<div class="container-fluid" ng-controller="AdminCtrl" >
+    <div class="jumbotron" id="admin">
+        <form id="adminAdd" name="adminForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Admin Name -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Name</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="name" placeholder="Enter User Name" class="k-textbox nutrilife_text_medium" ng-model="admin.name">
+                </div>
+            </div>
+
+            <!-- Admin Login ID-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Email ID</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="loginID" placeholder="Enter Login ID" class="k-textbox nutrilife_text_medium" ng-model="admin.login_id">
+                </div>
+            </div>
+
+            <!-- Admin Password-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Password</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="password" id="password" placeholder="Enter Password " class="k-textbox nutrilife_text_medium" ng-model="admin.password">
+                </div>
+            </div>
+
+            <!-- SSL -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">is Suspended</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="2"
+                            ng-model="admin.is_suspended"
+                            k-data-source="suspendedList">
+                    </input>
+                </div>
+            </div>
+
+            <!-- SSL -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-4 control-label">Role</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="3"
+                            ng-model="admin.role"
+                            k-data-source="roleList">
+                    </input>
+                </div>
+            </div>
+
+
+
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Diet Plan Grid -->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-grid="gridOptions" class="mc_grid" style="height:200px;width:100%">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
