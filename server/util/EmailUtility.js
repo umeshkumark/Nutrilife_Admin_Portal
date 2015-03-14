@@ -87,6 +87,8 @@ exports.onAddNewCustomer = function(customer,successCB,errorCB){
             var tableHeader='<tr>' +
                 '<th>First Name</th>' +
                 '<th>Last Name</th>' +
+                '<th>Email</th>' +
+                '<th>Contact No</th>' +
                 '<th>Age</th>' +
                 '<th>Diet Plan</th>' +
                 '<th>Plan Duration</th>' +
@@ -96,6 +98,8 @@ exports.onAddNewCustomer = function(customer,successCB,errorCB){
             var tableBody = '<tr> ' +
             '<td>'+customer['first_name']+'</td>' +
             '<td>'+customer['last_name']+'</td>' +
+            '<td>'+customer['emailID']+'</td>' +
+            '<td>'+customer['mobileNo']+'</td>' +
             '<td>'+customer['age']+'</td>' +
             '<td>'+customer['plan_id']+'</td>' +
             '<td>'+customer['plan_duration']+' months </td>' +
@@ -157,6 +161,8 @@ exports.onUpdateCustomer = function(originalDocument,updatedDocument,successCB,e
             var tableHeader='<tr>' +
                 '<th>First Name</th>' +
                 '<th>Last Name</th>' +
+                '<th>Email</th>' +
+                '<th>Contact No</th>' +
                 '<th>Age</th>' +
                 '<th>Diet Plan</th>' +
                 '<th>Plan Duration</th>' +
@@ -166,6 +172,8 @@ exports.onUpdateCustomer = function(originalDocument,updatedDocument,successCB,e
             var tableBody = '<tr> ' +
                 '<td>'+updatedCustomer['first_name']+'</td>' +
                 '<td>'+updatedCustomer['last_name']+'</td>' +
+                '<td>'+updatedCustomer['emailID']+'</td>' +
+                '<td>'+updatedCustomer['mobileNo']+'</td>' +   
                 '<td>'+updatedCustomer['age']+'</td>' +
                 '<td>'+updatedCustomer['plan_id']+'</td>' +
                 '<td>'+updatedCustomer['plan_duration']+' months</td>' +
@@ -175,6 +183,8 @@ exports.onUpdateCustomer = function(originalDocument,updatedDocument,successCB,e
             tableBody = tableBody + '<tr> ' +
                 '<td>'+originalCustomer['first_name']+'</td>' +
                 '<td>'+originalCustomer['last_name']+'</td>' +
+                '<td>'+originalCustomer['emailID']+'</td>' +
+                '<td>'+originalCustomer['mobileNo']+'</td>' + 
                 '<td>'+originalCustomer['age']+'</td>' +
                 '<td>'+originalCustomer['plan_id']+'</td>' +
                 '<td>'+originalCustomer['plan_duration']+' months</td>' +
@@ -231,6 +241,8 @@ exports.onDeleteCustomer = function(deletedCustomer,successCB,errorCB){
             var tableHeader='<tr>' +
                 '<th>First Name</th>' +
                 '<th>Last Name</th>' +
+                '<th>Email</th>' +
+                '<th>Contact No</th>' +
                 '<th>Age</th>' +
                 '<th>Diet Plan</th>' +
                 '<th>Plan Duration</th>' +
@@ -240,6 +252,8 @@ exports.onDeleteCustomer = function(deletedCustomer,successCB,errorCB){
             var tableBody = '<tr> ' +
                 '<td>'+customer['first_name']+'</td>' +
                 '<td>'+customer['last_name']+'</td>' +
+                '<td>'+customer['emailID']+'</td>' +
+                '<td>'+customer['mobileNo']+'</td>' +
                 '<td>'+customer['age']+'</td>' +
                 '<td>'+customer['plan_id']+'</td>' +
                 '<td>'+customer['plan_duration']+' months</td>' +
@@ -296,6 +310,8 @@ exports.sendCustomerReportInBody = function(data,subject,message,successCB,error
             var tableHeader='<tr>' +
                 '<th>First Name</th>' +
                 '<th>Last Name</th>' +
+                '<th>Email</th>' +
+                '<th>Contact No</th>' +
                 '<th>Age</th>' +
                 '<th>Diet Plan</th>' +
                 '<th>Plan Duration</th>' +
@@ -311,6 +327,8 @@ exports.sendCustomerReportInBody = function(data,subject,message,successCB,error
                 tableBody = tableBody + '<tr> ' +
                 '<td>'+customer['first_name']+'</td>' +
                 '<td>'+customer['last_name']+'</td>' +
+                '<td>'+customer['emailID']+'</td>' +
+                '<td>'+customer['mobileNo']+'</td>' +
                 '<td>'+customer['age']+'</td>' +
                 '<td>'+customer['plan_id']+'</td>' +
                 '<td>'+customer['plan_duration']+' months </td>' +

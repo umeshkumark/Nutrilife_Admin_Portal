@@ -15,6 +15,9 @@
 .nutrilife_text_medium {
     width: 75%;
 }
+.nutrilife_text_large {
+    width: 100%;
+}
 .nutrilife_text_small {
     width: 50%;
 }

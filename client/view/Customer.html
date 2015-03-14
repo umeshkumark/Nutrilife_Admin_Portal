@@ -21,6 +21,24 @@
                 </div>
             </div>
 
+            <!-- Customer Contact Details -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Contact No</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="mobileNo" placeholder="Enter Contact No" class="k-textbox nutrilife_text_medium" ng-model="customer.mobileNo">
+                </div>
+
+                <label class="col-md-2 control-label">Email ID</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input type="text" id="emailID" placeholder="Enter Email ID" class="k-textbox nutrilife_text_large" ng-model="customer.emailID">
+                </div>
+            </div>
+
+
+
             <div class="row form-group">
                 <!-- Customer Age -->
                 <!-- label -->
@@ -102,7 +120,7 @@
                 <label class="col-md-2 control-label">Medical Condition</label>
                 <!-- value-->
                 <div class="col-md-4" >
-                    <input type="text" id="medicalCondition" placeholder="Enter Medical Condition" class="k-textbox nutrilife_text_medium" ng-model="customer.medical_condition">
+                    <input type="text" id="medicalCondition" placeholder="Enter Medical Condition" class="k-textbox nutrilife_text_large" ng-model="customer.medical_condition">
                 </div>
 
                 <label class="col-md-2 control-label">Goal</label>
@@ -181,6 +199,29 @@
                 </div>
             </div>
 
+            <!-- Status -->
+            <div class="row form-group">
+                <!-- Sex -->
+                <label class="col-md-2 control-label">Status</label>
+                <!-- value-->
+                <div class="col-md-2" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="3"
+                            ng-model="customer.status"
+                            k-data-source="statusList">
+                    </input>
+                </div>
+                <label class="col-md-2 control-label">Final Comments</label>
+                <!-- value-->
+                <div class="col-md-6" >
+                    <input type="text" id="completedComments" placeholder="Enter Comments" class="k-textbox nutrilife_text_large" ng-model="customer.completed_comments">
+                </div>
+            </div>
+
             <!-- SAVE / UPDATE / RESET buttons -->
             <div class="row form-group">
                 <!-- SAVE -->
@@ -214,6 +255,32 @@
                 </div>
             </div>
         </div>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Filter Grid -->
+        <div class="row form-group">
+            <!-- Status -->
+            <label class="col-md-2 control-label">Customer Status</label>
+            <!-- value-->
+            <div class="col-md-3" >
+                <input kendo-combo-box
+                        k-data-text-field="'name'"
+                        k-data-value-field="'name'"
+                        k-filter="contains"
+                        k-auto-bind="true"
+                        k-min-length="3"
+                        ng-model="grid_customer_status"
+                        k-data-source="statusList">
+                </input>
+            </div>
+            <div class="col-md-3" >
+                <a class="btn btn-primary btn-md" role="button" ng-click="onGridFilter()">Filter Customer List</a>
+            </div>
+         </div>
 
     </div>
 </div>

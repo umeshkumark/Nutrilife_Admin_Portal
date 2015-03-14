@@ -1,0 +1,127 @@
+<div class="container-fluid" ng-controller="EventCtrl" >
+    <div class="jumbotron" id="events">
+        <form id="eventAdd" name="eventForm" class="form-horizontal">
+
+            <div crud-status-error-message ng-if="isError"></div>
+            <div crud-status-success-message ng-if="isSuccess"></div>
+
+            <!-- Event Type -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Event Type</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="2"
+                            ng-model="event.event_type"
+                            k-data-source="eventTypeList">
+                    </input>
+                </div>
+            </div>
+
+            <!-- When -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">When</label>
+                <!-- value-->
+                <div class="col-md-4" >
+                    <input kendo-date-picker id="startDate" ng-model="event.when">
+                </div>
+            </div>
+
+            <!-- Duration-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Duration</label>
+                <!-- value-->
+                <div class="col-md-2" >
+                    <input type="text" id="days" placeholder="Days" class="k-textbox nutrilife_text_small" ng-model="event.duration_days">  Days
+                </div>
+                <div class="col-md-2" >
+                    <input type="text" id="hours" placeholder="Hours" class="k-textbox nutrilife_text_small" ng-model="event.duration_hr">  Hours
+                </div>
+                <div class="col-md-2" >
+                    <input type="text" id="minutes" placeholder="Mins" class="k-textbox nutrilife_text_small" ng-model="event.duration_min">  Minutes
+                </div>
+            </div>
+
+            <!-- Charges-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Charges</label>
+                <!-- value-->
+                <div class="col-md-2" >
+                    <input type="text" id="charges" placeholder="Enter Charges" class="k-textbox nutrilife_text_medium" ng-model="event.charges">
+                </div>
+            </div>
+
+            <!-- Participants-->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Participants</label>
+                <!-- value-->
+                <div class="col-md-2" >
+                    <input type="text" id="participants" placeholder="Participants" class="k-textbox nutrilife_text_small" ng-model="event.participants">
+                </div>
+            </div>
+
+            <!-- Venue -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Venue</label>
+                <!-- value-->
+                <div class="col-md-8" >
+                    <input type="text" id="venue" placeholder="Enter Venue" class="k-textbox nutrilife_text_large" ng-model="event.venue">
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="row form-group">
+                <!-- label -->
+                <label class="col-md-2 control-label">Comments</label>
+                <!-- value-->
+                <div class="col-md-8" >
+                    <input type="text" id="comments" placeholder="Enter Comments" class="k-textbox nutrilife_text_large" ng-model="event.comments">
+                </div>
+            </div>
+
+            <!-- SAVE / UPDATE / RESET buttons -->
+            <div class="row form-group">
+                <!-- SAVE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onSave()" ng-disabled="isSave==false">SAVE</a>
+                </div>
+
+                <!-- UPDATE -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onUpdate()" ng-disabled="isUpdate==false">UPDATE</a>
+                </div>
+
+                <!-- RESET -->
+                <div class="col-md-2 col-md-offset-2" >
+                    <a class="btn btn-primary btn-md" role="button" ng-click="onReset()">RESET</a>
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- add a divider -->
+        <div>
+            <hr class="horizontal_divider_one">
+        </div>
+
+        <!-- Event Grid -->
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-grid="gridOptions" class="mc_grid" style="height:250px;width:95%">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

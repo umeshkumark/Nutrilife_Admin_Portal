@@ -7,6 +7,7 @@
 
 var express = require('express');
 var app = express();
+var cors = require('cors');
 
 // Read the config.json file
 var fs = require('fs');
@@ -40,9 +41,11 @@ function startServer(configData) {
         var db_conn_uri = configData[environment].dbURI;
         var http_port = null;
         var server_ip = null;
+        var tempFolder = null;
         if('openshift' == environment) {
             http_port = process.env.OPENSHIFT_NODEJS_PORT || configData[environment].httpPort;
             server_ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+            tempFolder = process.env.OPENSHIFT_TMP_DIR;
         }
         else if ('heroku' == environment){
             http_port = process.env.PORT || configData[environment].httpPort;
@@ -51,19 +54,30 @@ function startServer(configData) {
         else {
             http_port = configData[environment].httpPort;
             server_ip = configData[environment].serverIp;
+            tempFolder = current_dir;
         }
-        console.log('Start Server . Environment - ' + environment + ' , Static Dir - ' + static_dir + ', Home Screen - ' + home_screen_html_file + ', DB Conn URI - ' + db_conn_uri + ', Http Port - ' + http_port + ', Server IP - ' + server_ip);
-
+        console.log('Start Server . Environment - ' + environment + ' , Static Dir - ' + static_dir + ', Home Screen - ' + home_screen_html_file + ', DB Conn URI - ' + db_conn_uri + ', Http Port - ' + http_port + ', Server IP - ' + server_ip + ' Temp Dir ' + tempFolder);
+		
         app.use(express.static(static_dir));
         app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
+		app.use(cors());
+        /*app.use(function(request, response) {
+			// Setting up CORS headers
+			console.log('Setting up CORS headers');
+			//CORS
+			response.header('Access-Control-Allow-Origin', '*');
+			response.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+			response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+			next();
+        });*/
         app.use(app.router);
-
         // default route. When user hits F5/reload send the index.html file
         app.use(function(request, response) {
-            response.sendfile(home_screen_html_file);
+			response.sendfile(home_screen_html_file);
         });
+		
 
         // Load Server Route
         var server_routes = require('./server/route/ServerRoute.js')(app,current_dir,db_conn_uri);

@@ -43,6 +43,8 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
         $("html, body").animate({ scrollTop: 0 }, "slow");
     }
 
+    $scope.grid_customer_status = 'All';
+
     $scope.customer = {
         first_name:'',
         last_name:'',
@@ -61,16 +63,29 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
         amount_balance_comments:'',
         misc_comments:'',
         medical_condition:'',
-        goal:''
+        goal:'',
+        status:'All',
+        mobileNo:'',
+        emailID:'',
+        completed_comments:'',
+        grid_customer_status:'All'
     };
 
     $scope.selectedDocumentID = '';
-
     $scope.isSave = true;
     $scope.isUpdate = false;
     $scope.list = [];
     $scope.consultationList = [];
     $scope.dietPlanList = [];
+    $scope.statusList = [
+        {
+            name:'Completed'
+        },{
+            name:'In-Progress'
+        },{
+            name:'All'
+        }
+    ];
     $scope.sexList = [
         {
             name:'Male'
@@ -136,7 +151,12 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
             amount_balance_comments:'',
             misc_comments:'',
             medical_condition:'',
-            goal:''
+            goal:'',
+            grid_customer_status:'All',
+            status:'All',
+            mobileNo:'',
+            emailID:'',
+            completed_comments:'',
         };
         $scope.isSave = true;
         $scope.isUpdate = false;
@@ -166,7 +186,11 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
             amount_balance_comments:$scope.customer.amount_balance_comments,
             misc_comments:$scope.customer.misc_comments,
             medical_condition:$scope.customer.medical_condition,
-            goal:$scope.customer.goal
+            goal:$scope.customer.goal,
+            mobileNo:$scope.customer.mobileNo,
+            emailID:$scope.customer.emailID,
+            completed_comments:$scope.customer.completed_comments,
+            status:$scope.customer.status
         };
         var isSaved =  baseService.save(customerJSON,'/rest/api/customer/saveDocument');
         isSaved.then(function(data){
@@ -194,8 +218,12 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
         $scope.customer.amount_balance_comments=selectedElementJSON.amount_balance_comments;
         $scope.customer.misc_comments=selectedElementJSON.misc_comments;
         $scope.selectedDocumentID = selectedElementJSON._id;
-        $scope.medical_condition = selectedElementJSON.medical_condition;
-        $scope.goal = selectedElementJSON.goal;
+        $scope.customer.medical_condition = selectedElementJSON.medical_condition;
+        $scope.customer.goal = selectedElementJSON.goal;
+        $scope.customer.mobileNo = selectedElementJSON.mobileNo;
+        $scope.customer.emailID = selectedElementJSON.emailID;
+        $scope.customer.completed_comments = selectedElementJSON.completed_comments;
+        $scope.customer.status = selectedElementJSON.status;
         $scope.isSave = false;
         $scope.isUpdate = true;
     };
@@ -223,7 +251,11 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
             amount_balance_comments:$scope.customer.amount_balance_comments,
             misc_comments:$scope.customer.misc_comments,
             medical_condition:$scope.customer.medical_condition,
-            goal:$scope.customer.goal
+            goal:$scope.customer.goal,
+            mobileNo:$scope.customer.mobileNo,
+            emailID:$scope.customer.emailID,
+            completed_comments:$scope.customer.completed_comments,
+            status:$scope.customer.status
         };
         var ID = $scope.selectedDocumentID;
         var isUpdated =  baseService.update(customerJSON,ID,'/rest/api/customer/updateDocument');
@@ -251,6 +283,10 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'first_name\') }}</span></div>'},
             {field:'last_name', displayName:'Last Name',width:150,
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'last_name\') }}</span></div>'},
+            {field:'mobileNo', displayName:'Contact No',width:150,
+                cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'mobileNo\') }}</span></div>'},
+            {field:'emailID', displayName:'Email',width:150,
+                cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'emailID\') }}</span></div>'},
             {field:'consultation_id', displayName:'Consulation Type',width:150,
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'consultation_id\') }}</span></div>'},
             {field:'plan_id', displayName:'Plan Type',width:150,
@@ -267,6 +303,27 @@ nutrilifePortal.controller('CustomerCtrl',function($scope,$rootScope,baseService
         multiSelect: false,
         enableRowSelection:false,
         selectedItems: []
+    };
+
+    // Grid Filter 
+    $scope.onGridFilter = function(){
+        var customerList = null;
+        var status = $scope.grid_customer_status;
+        console.log('onGridFilter Status : ' + status);
+        if(status == 'All') {
+            customerList = baseService.getList('/rest/api/customer/list');
+        }
+        else {
+            var filterCriteria = {
+                status:status
+            };
+            customerList = baseService.getFilteredList('/rest/api/customer/filteredList',filterCriteria);
+        }
+        customerList.then(function(data){
+            console.log('CustomerCtrl#list');
+            console.dir(data);
+            $scope.list = data.list;
+        });
     };
 
 });

@@ -27,6 +27,8 @@
     <script src="./js/ext/ng-grid-2.0.11.min.js"></script>
     <!-- Nutrilife Client Routes file -->
     <script src="./js/ClientRoutes.js"></script>
+    <!-- File Saver -->
+    <script src="./js/ext/FileSaver.min.js"></script>
 
 
     <!-- Initialize AngularJS application -->
@@ -46,6 +48,7 @@
     <script src="./js/controller/ReportController.js"></script>
     <script src="./js/controller/SiteMgmtController.js"></script>
     <script src="./js/controller/PasswordController.js"></script>
+    <script src="./js/controller/EventController.js"></script>
     <script src="./js/service/BaseService.js"></script>
     <script src="./js/directive/CRUDStatusMessageDirective.js"></script>
 
@@ -155,6 +158,7 @@
                                     <li><a href="report">Reports</a></li>
                                     <li><a href="diet_plan">Diet Plans</a></li>
                                     <li><a href="consultation">Consultation Plans</a></li>
+                                    <li><a href="event">Events</a></li>
                                 </ul>
                                 <!-- Super Admin Options -->
                                 <ul class="nav navbar-nav" ng-show="isUserLoggedIn==true && userDetails.role=='Super_Admin'" ng-hide="isUserLoggedIn==false || userDetails.role=='Admin'">

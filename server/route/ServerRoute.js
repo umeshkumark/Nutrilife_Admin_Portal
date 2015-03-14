@@ -10,7 +10,7 @@
 var path = require('path');
 
 module.exports = function(app,currentDir,mongoDBURI){
-    console.log('ServerRoute Current DIR - ' + currentDir + ' , MongoDB URI - ' + mongoDBURI);
+    console.log('ServerRoute Current DIR - ' + currentDir + ' , MongoDB URI - ' + mongoDBURI );
 
     // Add all Route Files
 
@@ -30,6 +30,20 @@ module.exports = function(app,currentDir,mongoDBURI){
     var customerRoute = require('./CustomerRoute.js');
     customerRoute.initRoute(currentDir,mongoDBURI,'CustomerDAO.js',emailUtility);
 
+    var eventRoute = require('./EventRoute.js');
+    eventRoute.initRoute(currentDir,mongoDBURI,'EventDAO.js');
+	
+	app.use(function(request, response) {
+			// Setting up CORS headers in Server Route.js
+			console.log('Setting up CORS headers');
+			//CORS
+			response.setHeader('Access-Control-Allow-Origin', '*');
+			response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+			response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+
+        });
+	
     // Default Route . Return index.html file
     app.get('/',function(request,response){
         console.log('ServerRoute#Default Route');
@@ -75,5 +89,11 @@ module.exports = function(app,currentDir,mongoDBURI){
     app.delete('/rest/api/customer/deleteDocument/:ID?',customerRoute.deleteDocument);
     app.post('/rest/api/customer/filteredList',customerRoute.filterDocuments);
 
-    // For Sending Email
+    // Event Route
+    // Diet Plan Route
+    app.get('/rest/api/event/list',eventRoute.listDocuments);
+    app.post('/rest/api/event/saveDocument',eventRoute.saveDocument);
+    app.post('/rest/api/event/updateDocument/:ID?',eventRoute.updateDocument);
+    app.delete('/rest/api/event/deleteDocument/:ID?',eventRoute.deleteDocument);
+
 };

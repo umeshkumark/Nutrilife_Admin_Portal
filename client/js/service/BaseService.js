@@ -45,7 +45,7 @@ nutrilifePortal.factory('baseService', function($http) {
             return promise;
         },
         getList:function(restEndPoint) {
-            console.log('nutrilifePortal#getList REST End Point - ' + restEndPoint);
+            console.log('nutrilifePortal#getList CORS REST End Point - ' + restEndPoint);
             var promise = $http({
                 method:'GET',
                 url:restEndPoint
@@ -148,18 +148,6 @@ nutrilifePortal.factory('baseService', function($http) {
                 console.log('Error in nutrilifePortal#sendEmail');
             });
             return promise;
-        },
-        exportReport:function(documentJSON,restEndPoint) {
-            console.log('nutrilifePortal#exportReport REST End Point - ' + restEndPoint);
-            var promise = $http({
-                method:'POST',
-                url:restEndPoint,
-                data:documentJSON
-            }).then(function(response){
-                return response.data;
-            },function(error){
-                console.log('Error in nutrilifePortal#exportReport');
-            });
         }
     };
 

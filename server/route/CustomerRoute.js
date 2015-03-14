@@ -12,6 +12,7 @@ var currentDir = null;
 var dao = null;
 var path = require('path');
 var emailUtility = null;
+var tmp = null;
 
 // Initialize
 exports.initRoute = function(curDir,dbConnURI,daoFileName,emailUtil) {
@@ -89,7 +90,11 @@ exports.saveDocument = function(request,response) {
         amount_balance_comments:documentJSON.amount_balance_comments,
         misc_comments:documentJSON.misc_comments,
         medical_condition:documentJSON.medical_condition,
-        goal:documentJSON.goal
+        goal:documentJSON.goal,
+        mobileNo:documentJSON.mobileNo,
+        emailID:documentJSON.emailID,
+        status:documentJSON.status,
+        completed_comments:documentJSON.completed_comments
     };
     dao.saveDocument(newDocument,function(savedDocument){
         // Get the list of Documents (Collection)
@@ -154,7 +159,11 @@ exports.updateDocument = function(request,response){
         amount_balance_comments:documentJSON.amount_balance_comments,
         misc_comments:documentJSON.misc_comments,
         medical_condition:documentJSON.medical_condition,
-        goal:documentJSON.goal
+        goal:documentJSON.goal,
+        mobileNo:documentJSON.mobileNo,
+        emailID:documentJSON.emailID,
+        status:documentJSON.status,
+        completed_comments:documentJSON.completed_comments
     };
     // Get the Details of existing Customer
     dao.getByID(documentID,function(originalCustomer){
@@ -246,5 +255,4 @@ exports.deleteDocument = function(request,response){
             message:'Could not delete the Customer'
         });
     });
-
 };

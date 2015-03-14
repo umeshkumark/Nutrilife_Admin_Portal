@@ -33,6 +33,9 @@ var ClientRoutes = function($routeProvider,$locationProvider){
         .when('/password',{
             templateUrl: 'view/Password.html'
         })
+        .when('/event',{
+            templateUrl: 'view/Event.html'
+        })
         .otherwise({
             redirectTo: '/'
         });

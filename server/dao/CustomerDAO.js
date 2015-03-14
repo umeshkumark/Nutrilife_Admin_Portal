@@ -53,7 +53,8 @@ exports.updateDocument = function(documentJSON,documentID,successCB,errorCB) {
             amount_balance:documentJSON.amount_balance,amount_balance_comments:documentJSON.amount_balance_comments,
             medical_condition:documentJSON.medical_condition,goal:documentJSON.goal,
             misc_comments:documentJSON.misc_comments,last_name:documentJSON.last_name,
-            updatedTime:documentJSON.updatedTime,updatedBy:documentJSON.updatedBy}},
+            updatedTime:documentJSON.updatedTime,updatedBy:documentJSON.updatedBy,mobileNo:documentJSON.mobileNo,
+            emailID:documentJSON.emailID,status:documentJSON.status,completed_comments:documentJSON.completed_comments}},
         function(error,updatedDocument){
             if(error){
                 console.log('Error while updating document ' + error);

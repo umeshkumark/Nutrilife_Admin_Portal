@@ -1,8 +1,18 @@
 /**
  * Created by Umesh on 26-12-2014.
  */
-nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,baseService) {
+nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,$window,baseService) {
     console.log('nutrilifePortal#ReportCtrl');
+
+    $scope.statusList = [
+        {
+            name:'Completed'
+        },{
+            name:'In-Progress'
+        },{
+            name:'All'
+        }
+    ];
 
     // Status Message
     function resetStatusMessages(){
@@ -50,7 +60,8 @@ nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,baseService) 
         first_name:'',
         last_name:'',
         plan_id:'',
-        consultation_id:''
+        consultation_id:'',
+        status:'All'
     };
 
     $scope.consultationList = [];
@@ -97,6 +108,9 @@ nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,baseService) 
         var filterCriteria = {};
         for (var key in $scope.customerFilter){
             var value = $scope.customerFilter[key];
+            if(key == 'status' && value == 'All') {
+                continue;
+            }
             if(value != ''){
                 filterCriteria[key] = value;
             }
@@ -123,18 +137,40 @@ nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,baseService) 
     };
 
     $scope.onExport = function(){
-        var isExported = baseService.exportReport($scope.list,'');
-        isExported.then(function(data){
-            console.log('Exported ...');
-        });
+        if(!$rootScope.userDetails.role == 'Super_Admin') {
+            alert('You are not authorized for Customer Export');
+            return;
+        }
+        else {
+            var csvBlob = new Blob([getCSVFromList($scope.list)], { type: 'text/csv;charset=utf-8' });
+            saveAs(csvBlob, 'Report.csv');    
+        }
+        
     };
+
+    function getCSVFromList(documentList) {
+        var header = 'First Name,Last Name,Email,Mobile No,Age,Sex,Height,Weight,Plan,Consultation,Goal,Medical Condition,Start Date,Duration,Price,Amount Paid,Comments,Balance,Comments,';
+        var documentListSize = documentList.length;
+        var rowData = header+'\n';
+        for(var docCounter=0;docCounter<documentListSize;docCounter++){
+            var customer = documentList[docCounter];
+            rowData = rowData + customer.first_name+','+customer.last_name+','+customer.emailID+','+customer.mobileNo+','+customer.age+','
+            +customer.sex+','+customer.height+','+customer.weight+','+customer.plan_id+','+customer.consultation_id+','+customer.goal+','
+            +customer.medical_condition+','+customer.start_date+','+customer.plan_duration+','+customer.price+','+customer.amount_paid+','
+            +customer.amount_paid_comments+','+customer.amount_balance+','+customer.amount_balance_comments;
+            rowData = rowData+'\n';
+        } // End of iteration of all Documents
+        console.log('Customers : ' + rowData);
+        return rowData;
+    }
 
     $scope.onResetCustomerFilter = function(){
         $scope.customerFilter = {
             first_name:'',
             last_name:'',
             plan_id:'',
-            consultation_id:''
+            consultation_id:'',
+            status:'All'
         };
         $scope.list = allCustomerList;
         resetStatusMessages();
@@ -148,7 +184,11 @@ nutrilifePortal.controller('ReportCtrl',function($scope,$rootScope,baseService) 
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'first_name\') }}</span></div>'},
             {field:'last_name', displayName:'Last Name',width:150,
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'last_name\') }}</span></div>'},
-            {field:'consultation_id', displayName:'Consulation Type',width:250,
+            {field:'mobileNo', displayName:'Contact No',width:150,
+                cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'mobileNo\') }}</span></div>'},
+            {field:'emailID', displayName:'Email',width:150,
+                cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'emailID\') }}</span></div>'},
+            {field:'consultation_id', displayName:'Consulation Type',width:150,
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'consultation_id\') }}</span></div>'},
             {field:'plan_id', displayName:'Plan Type',width:150,
                 cellTemplate:'<div class="ngCellText" ng-class="col.colIndex()"><span>{{row.getProperty(\'plan_id\') }}</span></div>'},

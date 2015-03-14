@@ -54,6 +54,25 @@
                     </input>
                 </div>
             </div>
+
+            <!-- Filter Grid -->
+            <div class="row form-group">
+                <!-- Status -->
+                <label class="col-md-2 control-label">Customer Status</label>
+                <!-- value-->
+                <div class="col-md-3" >
+                    <input kendo-combo-box
+                            k-data-text-field="'name'"
+                            k-data-value-field="'name'"
+                            k-filter="contains"
+                            k-auto-bind="true"
+                            k-min-length="3"
+                            ng-model="customerFilter.status"
+                            k-data-source="statusList">
+                    </input>
+                </div>
+            </div>
+
             <div class="row form-group">
                 <!-- EXPORT -->
                 <div class="col-md-2 col-md-offset-2" >
